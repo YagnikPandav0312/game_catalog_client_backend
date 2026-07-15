@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const logger = require("../middlewares/logger.middleware");
 const verifyToken = require("../middlewares/auth.middleware");
-const { getGames } = require("../controllers/games.controller");
+const { getClientFilters } = require("../controllers/filter.controller");
 
-router.post("/getGames", verifyToken, logger, getGames);
+router.get("/filters", verifyToken, logger, getClientFilters);
 
 module.exports = router;
