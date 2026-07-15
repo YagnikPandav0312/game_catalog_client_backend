@@ -4,11 +4,12 @@ async function getGames() {
     let client;
     try {
         client = await pool.connect();
-        const query = `SELECT * FROM get_client_games()`;
+        const query = `SELECT * FROM get_games()`;
         const result = await client.query(query);
         return result.rows;
     } catch (error) {
         console.error("Error fetching dashboard statistics:", error);
+        throw error;
     } finally {
         if (client) {
             client.release();
@@ -20,11 +21,12 @@ async function getProviders() {
     let client;
     try {
         client = await pool.connect();
-        const query = `SELECT * FROM get_client_providers()`;
+        const query = `SELECT * FROM get_providers()`;
         const result = await client.query(query);
         return result.rows;
     } catch (error) {
         console.error("Error fetching dashboard statistics:", error);
+        throw error;
     } finally {
         if (client) {
             client.release();
@@ -36,11 +38,12 @@ async function getCategories() {
     let client;
     try {
         client = await pool.connect();
-        const query = `SELECT * FROM get_client_categories()`;
+        const query = `SELECT * FROM get_games()`;
         const result = await client.query(query);
         return result.rows;
     } catch (error) {
         console.error("Error fetching dashboard statistics:", error);
+        throw error;
     } finally {
         if (client) {
             client.release();
