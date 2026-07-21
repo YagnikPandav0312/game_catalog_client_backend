@@ -1,13 +1,15 @@
 const express = require("express");
 const app = express();
-const homeRoutes = require("./home.routes");
+const casinoRoutes = require("./casino.routes");
 const playerRoutes = require("./player.routes");
 const gamesRoutes = require("./games.routes");
 const providersRoutes = require("./providers.routes");
 const categoriesRoutes = require("./categories.routes");
 const clientRoutes = require("./filter.routes");
+const sportRoutes = require("./sport.routes");
 
-app.use("/home", homeRoutes);
+app.use("/casino", casinoRoutes);
+app.use("/sport", sportRoutes);
 app.use("/player", playerRoutes);
 app.use("/games", gamesRoutes);
 app.use("/providers", providersRoutes);

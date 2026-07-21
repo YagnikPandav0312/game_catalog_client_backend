@@ -1,10 +1,10 @@
-const homeService = require("../service/home.service");
+const casinoService = require("../service/casino.service");
 
 async function home(req, res) {
   try {
-    const games = await homeService.getGames();
-    const providers = await homeService.getProviders();
-    const categories = await homeService.getCategories();
+    const games = await casinoService.getGames();
+    const providers = await casinoService.getProviders();
+    const categories = await casinoService.getCategories();
     return res.status(200).json({
       data: {
         games: games,
@@ -28,6 +28,6 @@ async function home(req, res) {
 }
 
 module.exports = {
-  getHome: home
+  getCasino: home
 };
 

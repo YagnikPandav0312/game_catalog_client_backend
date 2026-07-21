@@ -1,8 +1,8 @@
-const homeService = require("../service/home.service");
+const casinoService = require("../service/casino.service");
 
 async function getCategories(req, res) {
     try {
-        const categories = await homeService.getCategories();
+        const categories = await casinoService.getCategories();
         return res.status(200).json({
             data: categories,
             status: {
