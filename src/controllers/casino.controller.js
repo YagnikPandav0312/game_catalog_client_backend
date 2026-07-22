@@ -2,15 +2,9 @@ const casinoService = require("../service/casino.service");
 
 async function home(req, res) {
   try {
-    const games = await casinoService.getGames();
-    const providers = await casinoService.getProviders();
-    const categories = await casinoService.getCategories();
+    const data = await casinoService.getCasinoHome();
     return res.status(200).json({
-      data: {
-        games: games,
-        providers: providers,
-        categories: categories,
-      },
+      data: data,
       status: {
         code: 0,
         message: "Home Fetched Successfully",
