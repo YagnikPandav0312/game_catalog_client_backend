@@ -3,6 +3,14 @@ const casinoService = require("../service/casino.service");
 async function home(req, res) {
   try {
     const data = await casinoService.getCasinoHome();
+    if (!data) {
+      return res.status(404).json({
+        status: {
+          code: 1,
+          message: "No Data Found",
+        },
+      });
+    }
     return res.status(200).json({
       data: data,
       status: {

@@ -1,18 +1,20 @@
 const playerService = require("../service/player.service");
+const { validate } = require("../utils/schemaValidation");
+const { playerRegister, playerLogin } = require('../utils/validation');
 
 async function registerPlayer(req, res) {
     try {
-        const email = req.body.email || req.body.username || req.body.user_name;
-        const { full_name, password } = req.body || {};
-        // Validation
-        if (!full_name || !email || !password) {
+        const validationError = await validate(req.body, playerRegister)
+        if (validationError) {
             return res.status(400).json({
                 status: {
                     code: 3,
-                    message: "Full Name, Email, And Password Are Required"
+                    message: validationError
                 }
             });
         }
+        const email = req.body.email || req.body.username || req.body.user_name;
+        const { full_name, password } = req.body || {};
         const result = await playerService.registerPlayer(full_name, email, password);
         if (result.code === 0) {
             return res.status(201).json({
@@ -43,17 +45,17 @@ async function registerPlayer(req, res) {
 
 async function loginPlayer(req, res) {
     try {
-        const email = req.body.email || req.body.username || req.body.user_name;
-        const { password } = req.body || {};
-        // Validation
-        if (!email || !email.trim() || !password) {
+        const validationError = await validate(req.body, playerLogin)
+        if (validationError) {
             return res.status(400).json({
                 status: {
                     code: 3,
-                    message: "Email and password are required"
+                    message: validationError
                 }
             });
         }
+        const email = req.body.email || req.body.username || req.body.user_name;
+        const { password } = req.body || {};
         const result = await playerService.loginPlayer(email, password);
         if (!result) {
             return res.status(200).json({
@@ -133,7 +135,7 @@ async function logoutPlayer(req, res) {
                 }
             });
         } else {
-            if(!result){
+            if (!result) {
                 return res.status(200).json({
                     status: {
                         code: 1,
