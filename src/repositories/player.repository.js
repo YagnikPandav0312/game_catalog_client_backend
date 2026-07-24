@@ -4,7 +4,7 @@ async function registerPlayer(fullName, email, hashedPassword) {
     let client;
     try {
         client = await pool.connect();
-        const query = `SELECT * FROM register($1, $2, $3)`;
+        const query = `SELECT * FROM game_catalog_client.register($1, $2, $3)`;
         const result = await client.query(query, [fullName, email, hashedPassword]);
         return result.rows[0];
     } catch (error) {
@@ -21,11 +21,7 @@ async function getPlayerByEmail(email) {
     let client;
     try {
         client = await pool.connect();
-        const query = `
-            SELECT player_id, full_name, email, password, is_active, is_delete 
-            FROM players 
-            WHERE lower(email) = lower(trim($1)) AND is_delete = false
-        `;
+        const query = `SELECT * FROM game_catalog_client.login_player($1)`;
         const result = await client.query(query, [email]);
         return result.rows[0];
     } catch (error) {
@@ -44,7 +40,7 @@ async function getPlayerById(playerId) {
         client = await pool.connect();
         const query = `
             SELECT player_id, full_name, email, is_active, is_delete 
-            FROM players 
+            FROM game_catalog_client.players 
             WHERE player_id = $1 AND is_delete = false
         `;
         const result = await client.query(query, [playerId]);
@@ -63,7 +59,7 @@ async function logoutPlayer(playerId) {
     let client;
     try {
         client = await pool.connect();
-        const query = `SELECT * FROM logout($1)`;
+        const query = `SELECT * FROM game_catalog_client.logout($1)`;
         const result = await client.query(query, [playerId]);
         return result.rows[0];
     } catch (error) {

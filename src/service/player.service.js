@@ -92,13 +92,13 @@ async function logoutPlayer(playerId) {
         return {
             success: true,
             code: 0,
-            message: result.message || "Logout successful"
+            message: result.message || "Logout successfully !"
         };
     } else {
         return {
             success: false,
             code: result.code,
-            message: result.message || "Logout failed"
+            message: result.message || "Logout failed !"
         };
     }
 }
