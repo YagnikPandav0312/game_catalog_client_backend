@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const path = require("path");
 
 const indexRoutes = require("./routes/index.route");
 const logger = require("./middlewares/logger.middleware");
